@@ -2388,7 +2388,7 @@ try{
   db=getFirestore(app);auth=getAuth(app);
 }catch(e){}
 
-const CLOUD_NAME="dvmzy3zz5",UPLOAD_PRESET="rtjlvkuf",BACKEND='',AUTH_API='/auth',ORDER_API='/odr/api/update-order';
+const CLOUD_NAME="dvmzy3zz5",UPLOAD_PRESET="rtjlvkuf",BACKEND='https://airvane.space',AUTH_API='/auth',ORDER_API='https://airvane.space/odr/api/update-order';
 let appBooted=false;
 const tokenHeader=async()=>{try{return (auth&&auth.currentUser)?{Authorization:`Bearer ${await getIdToken(auth.currentUser,true)}`}:{}}catch(e){return{}}};
 
@@ -5085,7 +5085,7 @@ window.sendEmailFromSheet=async()=>{
   if(!to)return showToast('Recipient email daalo','error');
   const btn=$('emSendBtn'),og=btn.innerHTML;btn.innerHTML=window.avSpin('Sending...');btn.disabled=true;
   try{
-    const res=await fetch("/odr/api/admin-email",{method:'POST',headers:{'Content-Type':'application/json',...(await tokenHeader())},body:JSON.stringify({email:to,subject:$('em_subject').value,message:$('em_msg').value})});
+    const res=await fetch("https://airvane.space/odr/api/admin-email",{method:'POST',headers:{'Content-Type':'application/json',...(await tokenHeader())},body:JSON.stringify({email:to,subject:$('em_subject').value,message:$('em_msg').value})});
     const d=await res.json().catch(()=>({}));
     if(res.ok&&d.success){closeSheets();showToast('Email sent to '+to)}else throw new Error(d.message||('Email server error ('+res.status+')'));
   }catch(e){
